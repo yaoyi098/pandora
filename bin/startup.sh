@@ -54,4 +54,6 @@ cleanup() {
 trap 'cleanup' SIGTERM
 
 # shellcheck disable=SC2086
-$(command -v ${PANDORA_COMMAND}) ${PANDORA_ARGS}
+$(command -v ${PANDORA_COMMAND}) ${PANDORA_ARGS} &
+
+wait
