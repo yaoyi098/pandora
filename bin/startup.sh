@@ -44,5 +44,16 @@ fi
 
 export USER_CONFIG_DIR
 
+# Defines the cleanup operations to be performed when the SIGTERM signal is received.
+cleanup() {
+  echo "Receive SIGTERM, Closing..."
+  exit 0
+}
+
+# Register the cleanup function as the handler for SIGTERM signal
+trap 'cleanup' SIGTERM
+
 # shellcheck disable=SC2086
-$(command -v ${PANDORA_COMMAND}) ${PANDORA_ARGS}
+$(command -v ${PANDORA_COMMAND}) ${PANDORA_ARGS} &
+
+wait
